@@ -9,7 +9,8 @@ namespace Lumavate.Controllers
     {
         protected string integrationCloud { get; set; }
         protected string urlRef { get; set; }
-
+        private readonly LumavateContext _context;
+        
         public WidgetController(): base() {}
 
         public void init(string ic, string widgetType) {

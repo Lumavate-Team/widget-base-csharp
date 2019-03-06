@@ -27,6 +27,8 @@ namespace Lumavate.Common.Properties
         public string section { get; set; }
         [JsonProperty("name")]
         public string name { get; set; }
+        [JsonProperty("options")]
+        public string options { get; set; }
 
         public LumavateProperty(string c, string s, string n, string l, string p, string dv) {
             this.classification = c;
@@ -36,6 +38,7 @@ namespace Lumavate.Common.Properties
             this.type = p;
             this.defaultValue = dv;
             this.helpText = "";
+            this.options = "{}";
         }
     }
 }

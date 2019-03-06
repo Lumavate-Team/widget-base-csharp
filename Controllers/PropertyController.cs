@@ -28,8 +28,10 @@ namespace Lumavate.Controllers
             properties.Add(new LumavateProperty("Body","Properties","bodyColor","Background Color",PropertyTypes.COLOR,"#000000"));
             properties.Add(new LumavateProperty("Body","Properties","sampleText","Sample Text",PropertyTypes.TEXT,""));
             
-            System.Console.WriteLine("Properties:" + properties.ToString());
+            //System.Console.WriteLine("Properties:" + properties.ToString());
 
+            //_context.Properties = properties;
+            
             return new ApiResponse(new LumavatePayload(properties));
         }
 
