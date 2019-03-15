@@ -30,8 +30,8 @@ services:
       - 80:4201
       - 443:4202
     volumes:
-      - thor-data:/data:rw
-      - /Users/tbutler/Dev/components:/components/custom:rw
+      - ~/Dev/thor-data:/data:rw
+      - ~/Dev/components:/components/custom:rw
     environment:
       - PUBLIC_KEY=mIhuoMJh0jbA5W4pUUNK
       - PRIVATE_KEY=LXycaMpw5BzgfhsS4ydNxGzJ36qMnPrQHI8u2x3wQCZCZyGtZ4sOQbkEWnHmVchZEa79a0Y3xK7IKCymSLkugyabbJUGuXfyuoKL
