@@ -6,7 +6,7 @@ volumes:
     driver_opts:
       type: none
       o: bind
-      device: [Directory taht will house local storage for THOR] Example: /Users/tbutler/Dev/thor-data
+      device: /Users/tbutler/Dev/thor-data
 
 services:
   csharp:
@@ -31,7 +31,7 @@ services:
       - 443:4202
     volumes:
       - thor-data:/data:rw
-      - [Root Directory that house your local components followed by ':/components/custom:rw'] Example: /Users/tbutler/Dev/components:/components/custom:rw
+      - /Users/tbutler/Dev/components:/components/custom:rw
     environment:
       - PUBLIC_KEY=mIhuoMJh0jbA5W4pUUNK
       - PRIVATE_KEY=LXycaMpw5BzgfhsS4ydNxGzJ36qMnPrQHI8u2x3wQCZCZyGtZ4sOQbkEWnHmVchZEa79a0Y3xK7IKCymSLkugyabbJUGuXfyuoKL

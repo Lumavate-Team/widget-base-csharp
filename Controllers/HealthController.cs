@@ -1,12 +1,14 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 using System.Collections.Generic;
 using Lumavate.Models;
+using Lumavate.Common;
 
 namespace Lumavate.Controllers
 {
     public class HealthController : WidgetController
     {
-         public HealthController():base() { }
+         public HealthController(IOptions<EnvironmentConfig> config):base(config) { }
 
         // GET {ic}/{widgetType}/health
         [HttpGet("health")]

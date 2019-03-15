@@ -1,3 +1,4 @@
+using Microsoft.Extensions.Options;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using Lumavate.Models;
@@ -7,7 +8,7 @@ namespace Lumavate.Controllers
 {
     public class RenderController : WidgetController
     {
-         public RenderController():base() { }
+         public RenderController(IOptions<EnvironmentConfig> config):base(config) { }
 
         // GET {ic}/{widgetType}
         [HttpGet("{instanceId}")]
@@ -15,7 +16,7 @@ namespace Lumavate.Controllers
         public IActionResult Render([FromRoute] string ic, [FromRoute] string widgetType, [FromRoute] string instanceId)
         {
             base.init(ic, widgetType);
-            var response = new LumavateRequest(Request.Cookies["pwa_jwt"]).Get(Request.Scheme + "://" + Request.Host + "/pwa/v1/widget-instances/" + instanceId);
+            var response = new LumavateRequest(Request.Cookies["pwa_jwt"], this.configuration).Get(Request.Scheme + "://" + Request.Host + "/pwa/v1/widget-instances/" + instanceId);
             System.Console.WriteLine("Widget Instance");
             System.Console.WriteLine(response.Result.Value.ToString());
             return View("~/Pages/Home/Index.cshtml");

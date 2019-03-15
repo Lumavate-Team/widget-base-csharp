@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,7 @@ namespace Lumavate.Controllers
 {
     public class PropertyController : WidgetController
     {
-         public PropertyController():base() { }
+         public PropertyController(IOptions<EnvironmentConfig> config):base(config) { }
 
         // GET {ic}/{widgetType}/discover/properties
         [HttpGet("discover/properties")]
@@ -27,6 +28,7 @@ namespace Lumavate.Controllers
             properties.Add(new LumavateProperty("Header","Properties","backgroundColor","Background Color",PropertyTypes.COLOR,"#000000"));
             properties.Add(new LumavateProperty("Body","Properties","bodyColor","Background Color",PropertyTypes.COLOR,"#000000"));
             properties.Add(new LumavateProperty("Body","Properties","sampleText","Sample Text",PropertyTypes.TEXT,""));
+            properties.Add(new LumavateProperty("Body","Properties","sampleText2","Sample Text 2",PropertyTypes.COLOR,"#a2a2a2"));
             
             //System.Console.WriteLine("Properties:" + properties.ToString());
 
