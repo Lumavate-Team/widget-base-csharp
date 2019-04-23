@@ -11,7 +11,7 @@ namespace Lumavate.Controllers
          public HealthController(IOptions<EnvironmentConfig> config):base(config) { }
 
         // GET {ic}/{widgetType}/health
-        [HttpGet("health")]
+        [HttpGet("discover/health")]
         [Produces("application/json")]
         public ActionResult<IEnumerable<string>> GetHealth([FromRoute] string ic, [FromRoute] string widgetType)
         {
