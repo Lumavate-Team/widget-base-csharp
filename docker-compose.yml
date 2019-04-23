@@ -1,4 +1,4 @@
-version: '3'
+version: '3.3'
 
 services:
   csharp:
@@ -8,13 +8,8 @@ services:
       context: .
       dockerfile: ./Dockerfile
     ports:
-      - 8081:80
+      - 5000:5000
     environment:
       - PRIVATE_KEY=LXycaMpw5BzgfhsS4ydNxGzJ36qMnPrQHI8u2x3wQCZCZyGtZ4sOQbkEWnHmVchZEa79a0Y3xK7IKCymSLkugyabbJUGuXfyuoKL
       - PUBLIC_KEY=mIhuoMJh0jbA5W4pUUNK
-      - APP_SETTINGS=./config/dev.cfg
-      - BASE_URL=http://$DOCKER_IP
       - PROTO=http://
-      - WIDGET_URL_PREFIX=/ic/widget1/
-    volumes:
-      - './:/app'

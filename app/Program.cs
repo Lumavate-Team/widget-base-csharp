@@ -19,7 +19,6 @@ namespace Lumavate
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
-                .UseUrls("http://127.0.0.1:5000")
                 .UseStartup<Startup>();
     }
 }
