@@ -1,16 +1,15 @@
-FROM microsoft/dotnet:sdk AS build-env
+FROM microsoft/dotnet:sdk
+
+WORKDIR /vsdbg
+
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends unzip \
+    && rm -rf /var/lib/apt/lists/* \
+    && curl -sSL https://aka.ms/getvsdbgsh | bash /dev/stdin -v latest -l /vsdbg
+
+ENV DOTNET_USE_POLLING_FILE_WATCHER 1
+
 WORKDIR /app
+COPY ./app /app/
 
-# Copy csproj and restore as distinct layers
-COPY *.csproj ./
-RUN dotnet restore
-
-# Copy everything else and build
-COPY . ./
-RUN dotnet publish -c Release -o out
-
-# Build runtime image
-FROM microsoft/dotnet:aspnetcore-runtime
-WORKDIR /app
-COPY --from=build-env /app/out .
-ENTRYPOINT ["dotnet", "Widget.dll"]
+ENTRYPOINT dotnet watch run --urls=http://+:5000

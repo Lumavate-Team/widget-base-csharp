@@ -1,0 +1,20 @@
+version: '3'
+
+services:
+  csharp:
+    container_name: "csharp"
+    image: "csharp:dev"
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    ports:
+      - 8081:80
+    environment:
+      - PRIVATE_KEY=LXycaMpw5BzgfhsS4ydNxGzJ36qMnPrQHI8u2x3wQCZCZyGtZ4sOQbkEWnHmVchZEa79a0Y3xK7IKCymSLkugyabbJUGuXfyuoKL
+      - PUBLIC_KEY=mIhuoMJh0jbA5W4pUUNK
+      - APP_SETTINGS=./config/dev.cfg
+      - BASE_URL=http://$DOCKER_IP
+      - PROTO=http://
+      - WIDGET_URL_PREFIX=/ic/widget1/
+    volumes:
+      - './:/app'
