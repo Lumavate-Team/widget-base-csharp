@@ -12,23 +12,23 @@ namespace Lumavate.Common.Properties
 
     public class LumavateProperty
     {
-        [JsonProperty("classification")]
+        [JsonProperty("classification", Required = Required.Always)]
         public string classification { get; set; }
-        [JsonProperty("type")]
+        [JsonProperty("type", Required = Required.Always)]
         public string type { get; set; }
-        [JsonProperty("label")]
+        [JsonProperty("label", Required = Required.AllowNull)]
         public string label {get; set; }
         [JsonProperty("helpText")]
         public string helpText { get; set; }
 
         [JsonProperty("default")]
         public string defaultValue { get; set; }
-        [JsonProperty("section")]
+        [JsonProperty("section", Required = Required.AllowNull)]
         public string section { get; set; }
-        [JsonProperty("name")]
+        [JsonProperty("name", Required = Required.Always)]
         public string name { get; set; }
         [JsonProperty("options")]
-        public string options { get; set; }
+        public Options options { get; set; }
 
         public LumavateProperty(string c, string s, string n, string l, string p, string dv) {
             this.classification = c;
@@ -38,7 +38,19 @@ namespace Lumavate.Common.Properties
             this.type = p;
             this.defaultValue = dv;
             this.helpText = "";
-            this.options = "{}";
+            this.options = new Options();
         }
+    }
+
+    public class Options
+    {
+        [JsonProperty("rows")]
+        public int rows { get; set; }
+
+        [JsonProperty("min")]
+        public int min { get; set; }
+
+        [JsonProperty("max")]
+        public int max { get; set; }
     }
 }

@@ -4,35 +4,37 @@ using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Lumavate.Models;
+using Newtonsoft.Json;
 using Lumavate.Common;
 using Lumavate.Common.Properties;
 
 namespace Lumavate.Controllers
 {
-    public class PropertyController : WidgetController
+    public class PropertyController : BaseController
     {
-         public PropertyController(IOptions<EnvironmentConfig> config):base(config) { }
+        private const string Path = "studio-properties.json";
 
-        // GET {ic}/{widgetType}/discover/properties
+        public PropertyController(IOptions<EnvironmentConfig> config):base(config) { }
+
+        // GET {ic}/{urlRef}/discover/properties
         [HttpGet("discover/properties")]
         [Produces("application/json")]
-        public ActionResult<ApiResponse> GetProperties([FromRoute] string ic, [FromRoute] string widgetType)
+        public ActionResult<ApiResponse> GetProperties([FromRoute] string ic, [FromRoute] string urlRef)
         {
-            base.init(ic, widgetType);
-            System.Console.WriteLine("Integration Cloud:" + this.integrationCloud);
-            System.Console.WriteLine("Widget Type:" + this.urlRef);
+            base.init(ic, urlRef);
+            System.Console.WriteLine("Integration Cloud:" + this.IntegrationCloud);
+            System.Console.WriteLine("URL Reference:" + this.UrlRef);
 
-            var properties = new List<LumavateProperty>();
-            
-            properties.Add(new LumavateProperty("Header","Properties","backgroundColor","Background Color",PropertyTypes.COLOR,"#000000"));
-            properties.Add(new LumavateProperty("Body","Properties","bodyColor","Background Color",PropertyTypes.COLOR,"#000000"));
-            properties.Add(new LumavateProperty("Body","Properties","sampleText","Sample Text",PropertyTypes.TEXT,""));
-            properties.Add(new LumavateProperty("Body","Properties","sampleText2","Sample Text 2",PropertyTypes.COLOR,"#a2a2a2"));
-            
-            //System.Console.WriteLine("Properties:" + properties.ToString());
+            //Read in Properties from the studio-properties.json file
+            string json = System.IO.File.ReadAllText(Path);
+            var properties = JsonConvert.DeserializeObject<List<LumavateProperty>>(json);
 
-            //_context.Properties = properties;
+            // var properties = new List<LumavateProperty>();
+            
+            // properties.Add(new LumavateProperty("Header","Properties","backgroundColor","Background Color",PropertyTypes.COLOR,"#000000"));
+            // properties.Add(new LumavateProperty("Body","Properties","bodyColor","Background Color",PropertyTypes.COLOR,"#000000"));
+            // properties.Add(new LumavateProperty("Body","Properties","sampleText","Sample Text",PropertyTypes.TEXT,""));
+            // properties.Add(new LumavateProperty("Body","Properties","sampleText2","Sample Text 2",PropertyTypes.COLOR,"#a2a2a2"));
             
             return new ApiResponse(new LumavatePayload(properties));
         }

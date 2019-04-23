@@ -18,12 +18,12 @@ namespace Lumavate.Common
     {
         [JsonProperty("token")]
         public string Token { get; set; }
-        public EnvironmentConfig configuration { get; set; }
+        public EnvironmentConfig Configuration { get; set; }
 
         public LumavateRequest(string token, EnvironmentConfig config) 
         {
             this.Token = token;
-            this.configuration = config;
+            this.Configuration = config;
         }
 
         public async Task<OkObjectResult> Get(string url) {
@@ -33,7 +33,7 @@ namespace Lumavate.Common
                 
                 try 
                 {
-                    var signer = new Signer(this.configuration);
+                    var signer = new Signer(this.Configuration);
                     client.DefaultRequestHeaders.Add("Authorization","Bearer " + this.Token);
                     List<KeyValuePair<string,string>> signed_url = signer.GetSignature("GET",url,null);
                     result = await client.GetStringAsync(signed_url.First(z => z.Key == "s-url").Value.ToString());

@@ -11,7 +11,7 @@ volumes:
 services:
   csharp:
     container_name: "csharp"
-    image: "csharp:dev"
+    image: "csharp:develop"
     ports:
       - 8091:80
     environment:

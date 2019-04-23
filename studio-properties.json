@@ -1,0 +1,34 @@
+[
+    {
+        "classification":"Header",
+        "section":"Properties",
+        "name":"backgroundColor",
+        "label":"Background Color",
+        "type":"color",
+        "default":"#000000",
+        "helpText": "",
+        "options":null
+    },
+    {
+        "classification":"Body",
+        "section":"Properties",
+        "name":"bodyColor",
+        "label":"Background Color",
+        "type":"color",
+        "default":"#000000",
+        "helpText": "",
+        "options": null
+    },
+    {
+        "classification":"Body",
+        "section":"Properties",
+        "name":"sampleText",
+        "label":"Sample Text",
+        "type":"text",
+        "default":"Text Goes Here",
+        "helpText": "",
+        "options": {
+            "rows": 3
+        }
+    }
+]
