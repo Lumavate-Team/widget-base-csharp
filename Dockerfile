@@ -48,11 +48,13 @@ RUN apt-get install -y --no-install-recommends \
 
 RUN cd /usr/src \
       && wget https://www.python.org/ftp/python/3.7.3/Python-3.7.3.tgz \
+      && tar xvf Python-3.7.3.tgz \
       && cd Python-3.7.3 \
       && ./configure --enable-optimizations \
-      && make install
+      && make -j8 \
+      && make altinstall
 
-RUN python --version
+RUN python3.7 --version
 
 # Disable the invariant mode (set in base image)
 RUN apk add --no-cache icu-libs
